@@ -1,0 +1,20 @@
+#productlist{
+    display: flex;
+    width: 100%;
+   
+}
+#products-box{
+    padding: 10px;
+    background-color: rgb(240, 240, 240);
+    flex: 4;
+}
+#products-box h2{
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+#products-box > div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

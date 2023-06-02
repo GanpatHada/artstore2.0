@@ -1,0 +1,32 @@
+#filter-box{
+    flex: 1;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.heading{
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+.sub-headings{
+    font-size: 0.9rem;
+}
+.sub-headings *{
+    display: flex;
+    align-items: center;
+    margin: 2px 0px 2px 5px;
+}
+.sub-headings>*{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0px ;
+}
+#filter-box input{
+    accent-color: orangered;
+}
+#range-box{
+    width: 90%;
+}
