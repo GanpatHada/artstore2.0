@@ -1,11 +1,13 @@
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NotificationContext } from "./NotificationContext";
+import { LoadingContext } from "./LoadingContext";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const { showAlert } = useContext(NotificationContext);
+  const{handleOpen,handleClose}=useContext(LoadingContext)
   const navigate = useNavigate();
 
   const setToken = (token) => localStorage.setItem("token", token);

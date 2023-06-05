@@ -1,27 +1,30 @@
+import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
+import { LoadingContext } from "./LoadingContext";
 
 export const ProductContext = createContext();
 
 export default function ProductProvider({ children }) {
+  const{handleClose,handleOpen}=useContext(LoadingContext)
   const [showProducts, setShowProducts] = useState([]);
-  const [products, setProducts] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const [rangeValue, setRangeValue] = useState(0);
+  const [ratingValue, setRatingValue] = useState(0);
   const [priceValue, setPriceValue] = useState(false);
   const [sortValue, setSortValue] = useState(false);
   const [categoriesArray, setCategoriesArray] = useState([]);
 
   const fetchAllProducts = async () => {
+    handleOpen();
     try {
       const response = await fetch("/api/products", {
         method: "GET",
       });
       if (response.status === 200) {
         const { products } = await response.json();
-        setProducts(products);
         displayProducts(products);
+        handleClose();
       }
     } catch (error) {
       console.log(error);
@@ -48,10 +51,11 @@ export default function ProductProvider({ children }) {
 
   const handleSearchChange=(value)=>{
     setSearchValue(value);
+    console.log(searchValue)
   }
 
-  const handleRangeChange=(value)=>{
-    setRangeValue(value)
+  const handleRatingChange=(value)=>{
+    setRatingValue(value)
   }
 
   const handleCategoryChange=(value)=>{
@@ -71,7 +75,7 @@ export default function ProductProvider({ children }) {
 
   const handleClearFilter=()=>{
          setSearchValue("")
-         setRangeValue(0)
+         setRatingValue(0)
          setCategoriesArray([])
          setPriceValue(false)
          setSortValue(false)
@@ -93,14 +97,13 @@ export default function ProductProvider({ children }) {
         fetchProductsByCategories,
         topCategories,
         fetchAllProducts,
-
         searchValue,
-        rangeValue,
+        ratingValue,
         categoriesArray,
         priceValue,
         sortValue,
         handleSearchChange,
-        handleRangeChange,
+        handleRatingChange,
         handlePriceChange,
         handleSortChange,
         handleCategoryChange,

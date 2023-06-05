@@ -20,7 +20,7 @@ const Navbar = () => {
           value={searchValue}
           onFocus={() => navigate("/products")}
           onChange={e=>handleSearchChange(e.target.value)}
-          placeholder="Search by name / artist / category / price  "
+          placeholder="Search by name / category / price  "
         />
         <div>
           <NavLink to="/cart">

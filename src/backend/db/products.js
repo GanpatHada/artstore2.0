@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 
 export const products = [
   {
-    _id: uuid(),
+    _id: 'cd78f631-793c-4895-b649-7f062316a0d4',
     rating:'4',
     title: "Peacocks on Tree",
     image:"https://cdn.exoticindia.com/images/products/thumbnails/t400x300/paintings-2019/wsb846.jpg",

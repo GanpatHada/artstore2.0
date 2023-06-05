@@ -7,11 +7,11 @@ import { ProductContext } from "../../context/ProductContext";
 const Filter = () => {
   const {
     topCategories,
-    rangeValue,
+    ratingValue,
     categoriesArray,
     priceValue,
     sortValue,
-    handleRangeChange,
+    handleRatingChange,
     handlePriceChange,
     handleSortChange,
     handleCategoryChange,
@@ -26,10 +26,10 @@ const Filter = () => {
           <button onClick={handleClearFilter}>clear</button>
         </div>
         <div className="sub-headings">
-          <h4>Rating {`>= ${rangeValue}`}</h4>
+          <h4>Rating {`>= ${ratingValue}`}</h4>
           <div id="range-box">
             <Slider
-              onChange={(e) => handleRangeChange(e.target.value)}
+              onChange={(e) => handleRatingChange(e.target.value)}
               sx={{ color: "orangered" }}
               aria-label="star"
               defaultValue={0}
@@ -38,7 +38,7 @@ const Filter = () => {
               marks
               min={0}
               max={4}
-              value={rangeValue}
+              value={ratingValue}
             />
           </div>
         </div>

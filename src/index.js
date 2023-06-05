@@ -7,12 +7,14 @@ import { BrowserRouter } from "react-router-dom";
 import UserProvider from "./context/UserContext";
 import NotificationProvider from "./context/NotificationContext";
 import ProductProvider from "./context/ProductContext";
+import LoadingProvider from "./context/LoadingContext";
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <LoadingProvider>
       <ProductProvider>
         <NotificationProvider>
           <UserProvider>
@@ -20,6 +22,7 @@ ReactDOM.render(
           </UserProvider>
         </NotificationProvider>
       </ProductProvider>
+      </LoadingProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

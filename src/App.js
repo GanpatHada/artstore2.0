@@ -9,7 +9,6 @@ import MockMan from 'mockman-js'
 import UserDetails from "./pages/user-details/UserDetails";
 import Notification from "./components/notification/Notification";
 import ProductDetails from "./pages/productDetails/ProductDetails";
-
 function App() 
   {
   return (

@@ -5,8 +5,8 @@
 }
 #products-box{
     padding: 10px;
-    background-color: #ffece4;
     flex: 4;
+    background-color: #80808052;
 }
 #products-box h2{
     height: 40px;
