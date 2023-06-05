@@ -5,7 +5,7 @@
 }
 #products-box{
     padding: 10px;
-    background-color: rgb(240, 240, 240);
+    background-color: #ffece4;
     flex: 4;
 }
 #products-box h2{

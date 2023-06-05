@@ -10,6 +10,16 @@ body{
   overflow-x: hidden;
   
 }
-body::-webkit-scrollbar{
-  display: none;
+
+button{
+  border: none;
+  cursor: pointer;
+}
+.all-centered{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text-centered{
+  text-align: center;
 }

@@ -1,0 +1,37 @@
+#address-dialog-box  input{
+    height: 30px;
+    width: 300px;
+    margin: 5px 0px 10px 0px ;
+    padding: 10px;
+    
+}
+
+#address-form{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+#preview{
+    height: 110px;
+    border: 1px solid grey;
+    padding: 10px;
+}
+#address-buttons{
+    display: flex;
+}
+#address-buttons button{
+    margin: 10px 0px;
+    height: 40px;
+    width: 50%;
+    
+}
+#add-address-btn{
+    background-color: orangered;
+    color: white;
+}
+#fill-address-btn{
+    background-color: rgb(146, 146, 146);
+    color: rgb(27, 27, 27);
+}

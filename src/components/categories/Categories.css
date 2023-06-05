@@ -1,0 +1,34 @@
+#categories-box{
+    padding: 20px;
+}
+#categories-box > div{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.each-category-box{
+    height: 27vw;
+    width: 22%;
+    padding: 15px;
+    overflow: hidden;
+   
+}
+.category-image-box{
+    height: 90%;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.each-category-box img{
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+    transition: 0.2s ease-in-out;
+    
+}
+.each-category-box img:hover{
+    transform: scale(1.3);
+}

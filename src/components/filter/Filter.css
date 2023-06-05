@@ -1,9 +1,25 @@
 #filter-box{
     flex: 1;
     background-color: rgb(255, 255, 255);
+    
+    
+}
+#filter-box-content{
+    width: 20%;
+    position: fixed;
+    min-height: calc(100vh - 60px);
+    top: 60px;
+    left: 0px;
     padding: 10px;
 }
+#filter-box-content button{
+   height: 30px;
+   width: 60px ;
+   border-radius: 3px;
+   background-color: orangered;
+   color: white;
 
+}
 .heading{
     display: flex;
     height: 40px;

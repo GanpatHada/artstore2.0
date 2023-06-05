@@ -8,7 +8,10 @@ import Signup from "./pages/signup/Signup";
 import MockMan from 'mockman-js'
 import UserDetails from "./pages/user-details/UserDetails";
 import Notification from "./components/notification/Notification";
-function App() {
+import ProductDetails from "./pages/productDetails/ProductDetails";
+
+function App() 
+  {
   return (
     <div className="App">
         <Navbar/>
@@ -19,6 +22,8 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/mockman' element={<MockMan/>}/>
+          <Route path='/userdetails' element={<UserDetails/>}/>
+          <Route exact path='/products/:id' element={<ProductDetails/>}/>
         </Routes>
     </div>
   );

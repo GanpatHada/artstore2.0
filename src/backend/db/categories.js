@@ -8,20 +8,31 @@ import { v4 as uuid } from "uuid";
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "fiction",
+    image:'https://t3.ftcdn.net/jpg/05/59/08/20/240_F_559082077_Io1XjMg1q8WHXVTc3HuaxzJQB0H9LGbW.jpg',
+    categoryName: "Madhubani",
     description:
-      "literature in the form of prose, especially novels, that describes imaginary events and people",
+      "designs make perfectly distinctive geometrical patterns, scenes from mythology, and symbolic images",
   },
   {
     _id: uuid(),
-    categoryName: "non-fiction",
+    image:'https://t3.ftcdn.net/jpg/05/20/37/32/240_F_520373217_NLi01BVtO4wJUQSSWxDbvkeB2jrvp8vT.jpg',
+    categoryName: "Warli",
     description:
-      "Non-fiction is writing that gives information or describes real events, rather than telling a story.",
+      "Warli paintings also showcase day-to-day life scenarios of the local people of that particular community just like dancing, farming, hunting, praying, etc",
   },
   {
     _id: uuid(),
-    categoryName: "horror",
+    image:'https://t4.ftcdn.net/jpg/05/60/63/27/240_F_560632701_SEqKsOFx1nGIDcDwZvD2eSFnwfI6uoI3.jpg',
+    categoryName: "Miniature",
     description:
-      "Meant to cause discomfort and fear for both the character and readers, horror writers often make use of supernatural and paranormal elements in morbid stories that are sometimes a little too realistic.",
+      "These paintings are created using all-natural mineral colours, precious stones, conch shells, gold, and silver",
   },
+  {
+    _id: uuid(),
+    image:'https://t4.ftcdn.net/jpg/04/38/48/23/240_F_438482364_XOsRPL8U14UgCOzYI8i7ZvruDo1iOMpl.jpg',
+    categoryName: "Phad",
+    description:
+      "Phad Painting marvellously portrays multiple stories in a single composition and beautifully maintains the aesthetics of artistic expression",
+  },
+ 
 ];

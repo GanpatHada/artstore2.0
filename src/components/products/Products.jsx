@@ -1,24 +1,28 @@
 
+import { useNavigate } from "react-router-dom";
 import "./Products.css";
 import { AiFillHeart } from "react-icons/ai";
-const Products = () => {
+const Products = ({product:{image,title,categoryName,price,oldprice,_id}}) => {
+  const navigate=useNavigate()
  
   return (
-    <div className="product-boxes" >
+    <div className="product-boxes" onClick={()=>navigate(`/products/${_id}`)} >
       <div className="wishlist-box">
         <AiFillHeart style={{ color:'red'}} />
       </div>
       <div className="image-box">
         <img
-          src="https://images.unsplash.com/photo-1685453628701-bdf02c353bda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDh8TThqVmJMYlRSd3N8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+          src={image}
           alt=""
         />
       </div>
       <div className="product-title-box">
-        this is title
+        <strong>{title.length>20?title.slice(0,20)+'...':title}</strong>
+        <p>{categoryName}</p>
       </div>
       <div className="price-box">
-        INR:4000/-
+        <span id="oldprice">INR : {oldprice}</span>
+        <span id="newprice">INR : {price}</span>
       </div>
       <div className="cart-buttons-box">
          <button>Add to cart</button>

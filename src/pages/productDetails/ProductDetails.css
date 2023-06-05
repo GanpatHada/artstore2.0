@@ -1,0 +1,26 @@
+#product-details-box{
+   min-height: calc(100vh - 60px);
+   background-color: orange;
+   
+}
+#product-details-box-content{
+    min-height: 60vh;
+    width: 70vw;
+    background-color: red;
+    display: flex;
+    
+}
+#image-section
+{
+     flex: 1.5;
+     background-color: green;
+}
+#data-section{
+    flex: 2;
+    background-color: pink;
+    padding: 20px;
+}
+#data-section > *{
+    margin: 10px;
+}
+

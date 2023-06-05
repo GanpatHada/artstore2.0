@@ -3,19 +3,51 @@ import { useNavigate } from "react-router-dom";
 import { NotificationContext } from "./NotificationContext";
 export const UserContext = createContext();
 
-const setToken = (token) => localStorage.setItem("token", token);
-
 const UserProvider = ({ children }) => {
+  const [user, setUser] = useState({});
   const { showAlert } = useContext(NotificationContext);
   const navigate = useNavigate();
 
-  const [user, setUser] = useState({});
+  const setToken = (token) => localStorage.setItem("token", token);
+
+  
+  const updateUserAddress = (newAddress) => {
+    const previousUser = JSON.parse(localStorage.getItem("user"));
+    const updatedUser = {
+      ...previousUser,
+      address: [...previousUser.address, newAddress],
+    };
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    setUser(JSON.parse(localStorage.getItem('user')))
+  };
+
+
+  const setUserInLocalStorage = (user) => {
+    localStorage.setItem("user", JSON.stringify({ ...user, address: [] }));
+    setUser(JSON.parse(localStorage.getItem('user')));
+    
+  };
 
   const handleAuthErros = (errorCode) => {
-    if (errorCode === 422) return showAlert('error',`Error code ${errorCode}`,'Email already exists')
-    if (errorCode === 404) return showAlert('error',`Error code ${errorCode}`,'Email does not found')
-    if (errorCode === 401) return showAlert('error',`Error code ${errorCode}`,'Invalid credentials')
-  }
+    if (errorCode === 422)
+      return showAlert(
+        "error",
+        `Error code ${errorCode}`,
+        "Email already exists"
+      );
+    if (errorCode === 404)
+      return showAlert(
+        "error",
+        `Error code ${errorCode}`,
+        "Email does not found"
+      );
+    if (errorCode === 401)
+      return showAlert(
+        "error",
+        `Error code ${errorCode}`,
+        "Invalid credentials"
+      );
+  };
   const handleSignup = async ({ name, password, email }) => {
     try {
       let response = await fetch("/api/auth/signup", {
@@ -32,13 +64,10 @@ const UserProvider = ({ children }) => {
       });
 
       if (response.status === 201) {
-        const {
-          createdUser: { name, email, cart, wishlist },
-          encodedToken,
-        } = await response.json();
-        setUser({ name, email, cart, wishlist });
+        const { createdUser, encodedToken } = await response.json();
         setToken(encodedToken);
-        showAlert('success',`Success`,'Account created successfully');
+        setUserInLocalStorage(createdUser);
+        showAlert("success", `Success`, "Account created successfully");
         return navigate("/landing");
       }
       return handleAuthErros(response.status);
@@ -63,13 +92,10 @@ const UserProvider = ({ children }) => {
         }),
       });
       if (response.status === 200) {
-        const {
-          foundUser: { name, email, cart, wishlist },
-          encodedToken,
-        } = await response.json();
-        setUser({ name, email, cart, wishlist });
+        const { foundUser, encodedToken } = await response.json();
         setToken(encodedToken);
-        showAlert('success',`Success`,'Login successfully');
+        setUserInLocalStorage(foundUser);
+        showAlert("success", `Success`, "Login successfully");
         return navigate("/landing");
       }
       return handleAuthErros(response.status);
@@ -78,13 +104,20 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    return showAlert("success", "Success", "Logout successfully");
+  };
   return (
     <UserContext.Provider
       value={{
         handleSignup,
         handleLogin,
         handleLogout,
+        user,
+        setUser,
+        updateUserAddress
       }}
     >
       {children}

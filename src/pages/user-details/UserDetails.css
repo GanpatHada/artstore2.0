@@ -1,10 +1,11 @@
 #user-details-box{
     display: flex;
-    min-height: 400px;
+    flex-direction: column;
     width: 70%;
     max-width: 500px;
     margin:80px auto;
-    border: 1px solid grey;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: relative;
     
 }
 #user-details-box section{
@@ -15,6 +16,10 @@
    height: 50px;
    display: flex;
    border-bottom: 1px solid #dbdbdb;
+   position: absolute;
+   z-index: 5;
+   top: 0xp;
+   left: 0px;
    
    
 }
@@ -28,10 +33,60 @@
    
    
 }
+#user-details-box > div{
+    height: 350px;
+    overflow-y: auto;
+    margin-top: 50px;
+    padding: 10px;
+    padding-bottom: 5px;
+}
+#user-details-box > div > div *{
+    margin: 10px 0px;
+}
 .active-tab{
     background-color: orangered;
     color: white;
 }
+.unactive-tab{
+    background-color: white;
+}
 .unactive-tab:hover{ 
    background-color: rgb(255, 170, 136);
 }
+#user-image{
+    font-size: 100px;
+    color: gray;
+}
+#logout-btn{
+    height: 40px;
+    width: 120px;
+    background-color: white;
+    border: 2px solid red;
+    color: red;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 3px;
+}
+#logout-btn:hover{
+    background-color: red;
+    color: white;
+}
+
+#address-box div{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    margin-bottom: 10px;
+    min-height: 100px;
+}
+#add-icon{
+    background-color: orangered;
+    color: white;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 3;
+    font-size: 30px;
+}
+
