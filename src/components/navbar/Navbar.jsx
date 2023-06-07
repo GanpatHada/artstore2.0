@@ -11,6 +11,9 @@ const Navbar = () => {
   const { handleSearchChange, searchValue ,getToken} = useContext(ProductContext);
   const{user}=useContext(UserContext);
   const navigate = useNavigate();
+  
+  const isUserLoggedIn=()=>getToken()
+
   return (
     <div id="navbar">
       <nav>
@@ -39,7 +42,7 @@ const Navbar = () => {
           </NavLink>
           <NavLink to={"/userdetails"}>
             <div className="cart-box">
-              <AiOutlineUser id="profile-icon" className="cart-icon" />
+              <AiOutlineUser style={{color:isUserLoggedIn()?'lightgreen':'red'}} className="cart-icon" />
             </div>
           </NavLink>
         </div>

@@ -1,8 +1,15 @@
 import React, { useContext } from "react";
 import "./Checkout.css";
 import { UserContext } from "../../context/UserContext";
+import { NotificationContext } from "../../context/NotificationContext";
 const Checkout = () => {
-  const { user } = useContext(UserContext);
+  const { user,selectedAddress } = useContext(UserContext);
+  const {showAlert}=useContext(NotificationContext)
+  const handlePlaceOrder=()=>{
+    if(!selectedAddress)
+      return showAlert('error','Error','Please select address checkbox')
+  }
+
   const { totalPrice, totalItems, oldprice } = user.cart.reduce(
     (total, curTotal) => {
       return {
@@ -17,22 +24,28 @@ const Checkout = () => {
   );
   return (
     <div id="check-out-box">
-      <div>
+      
+        <div>
         <h1>Summary</h1>
         <hr />
-        <div>
-          <h3>Total price : {totalPrice}</h3>
-          <h3>Total Items : {totalItems}</h3>
-          <h4>Actual Price :{oldprice}</h4>
+        {user.cart.length>0&&<div id="check-out-fields">
+          <p>Total price : {totalPrice}</p>
+          <p>Total Items : {totalItems}</p>
+          <p>Actual Price :{oldprice}</p>
           <h4>Discount : {oldprice - totalPrice}</h4>
           <p>Dilivery Charge : {"50"}</p>
           <hr />
           <h4>Total amount : {totalPrice+50}</h4>
           <hr />
           <p>You have saved {oldprice-(totalPrice+50)} on this order</p>
-          <button>Place your order</button>
-        </div>
+          <div className="all-centered" style={{justifyContent:'flex-start'}}>
+          <input type="checkbox" id='select-address' />
+          <label htmlFor="select-address">select Address</label>
+          </div>
+          <button onClick={handlePlaceOrder}>Place your order</button>
+        </div>}
       </div>
+      
     </div>
   );
 };

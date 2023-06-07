@@ -66,11 +66,11 @@ const UserDetails = () => {
         )}
         {currentUserDetails === "Address" && (
           <div id="address-box">
-            {user?.address?.length===0?<h3>No address found</h3>:
-            user.address?.map(({ pin, city, state, details }, index) => {
+            {user.address.length===0?<h3>No address found</h3>:
+            user.address.map((address) => {
               return (
-                <div key={index} className="all-centered">
-                  {details + city + state + pin}
+                <div key={address._id} className="all-centered">
+                  {`${address.details} , ${address.city} , ${address.state} , ${address.pin}`}
                 </div>
               );
             })}

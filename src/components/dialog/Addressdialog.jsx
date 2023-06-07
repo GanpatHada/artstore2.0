@@ -1,17 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
+import { v4 as uuid } from "uuid";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import "./Addressdialog.css";
 import { NotificationContext } from "../../context/NotificationContext";
 import { UserContext } from "../../context/UserContext";
 export default function AddressDialog(props) {
-  const { updateUserAddress } = useContext(UserContext);
+  const { addUserAddress} = useContext(UserContext);
   const { showAlert } = useContext(NotificationContext);
   const [address, setaddress] = useState({
     details: "",
     city: "",
     state: "",
     pin: "",
+
   });
   const { onClose, open, } = props;
 
@@ -27,13 +29,14 @@ export default function AddressDialog(props) {
     if (!checkErrors()) {
       handleClose();
       showAlert("success", "Success", "Address added successfully");
-      updateUserAddress(address);
+      addUserAddress(address);
     }
   };
 
   const fillDummyValues = () =>
     setaddress({
       ...address,
+      _id:uuid(),
       details: "RNTH hostel near It park",
       city: "Indore",
       state: "M.P.",

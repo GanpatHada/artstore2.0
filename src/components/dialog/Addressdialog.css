@@ -17,6 +17,7 @@
     height: 110px;
     border: 1px solid grey;
     padding: 10px;
+    width: 300px;
 }
 #address-buttons{
     display: flex;

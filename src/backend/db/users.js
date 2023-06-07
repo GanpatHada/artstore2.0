@@ -14,5 +14,12 @@ export const users = [
     password: "guest123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    address:[{
+      _id:uuid(),
+      details:'B-43 Trapti villa Adarsh-Nagar',
+      city:'Gwalior',
+      state:'Madhya Pradesh',
+      pin:'474003'
+    }]
   },
 ];

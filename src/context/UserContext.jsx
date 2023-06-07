@@ -8,25 +8,23 @@ const UserProvider = ({ children }) => {
   const location=useLocation()
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
   const { showAlert } = useContext(NotificationContext);
-  const{startLoading,stopLoading}=useContext(LoadingContext)
+  const{startLoading,stopLoading}=useContext(LoadingContext);
+  const [selectedAddress,setSelectedAddress]=useState(false)
   const navigate = useNavigate();
 
   const setToken = (token) => localStorage.setItem("token", token);
 
+
+
   
-  // const updateUserAddress = (newAddress) => {
-  //   const previousUser = JSON.parse(localStorage.getItem("user"));
-  //   const updatedUser = {
-  //     ...previousUser,
-  //     address: [...previousUser.address, newAddress],
-  //   };
-  //   localStorage.setItem("user", JSON.stringify(updatedUser));
-    
-  // };
+  const addUserAddress = (newAddress) => {
+    setUser({...user,address:[...user.address,newAddress]})
+    showAlert('success','Success','Address added successfully')
+  };
 
 
   const setUserInLocalStorage = (user) => {
-    localStorage.setItem("user", JSON.stringify({ ...user, address: [] }));  
+    localStorage.setItem("user", JSON.stringify({ ...user}));  
   };
 
   const handleAuthErros = (errorCode) => {
@@ -130,7 +128,8 @@ const UserProvider = ({ children }) => {
         handleLogout,
         user,
         setUser,
-        // updateUserAddress
+        addUserAddress,
+        selectedAddress
       }}
     >
       {children}

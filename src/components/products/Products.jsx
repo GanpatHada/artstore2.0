@@ -22,7 +22,7 @@ const Products = ({product}) => {
 
   return (
     <div className="product-boxes" >
-      <div className="wishlist-box" onClick={()=>handleAddToWishlist(product,isProductAvailableInWishList(product._id))}>
+      <div className="wishlist-box" onClick={()=>getToken()?handleAddToWishlist(product,isProductAvailableInWishList(product._id)):navigate('/login')}>
         <AiFillHeart style={{ color:isProductAvailableInWishList(product._id)?'red':'white'}} />
       </div>
       <div onClick={()=>navigate(`/products/${_id}`)}>
