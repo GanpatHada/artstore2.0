@@ -12,10 +12,10 @@ const Products = ({product}) => {
   const{image,title,categoryName,price,oldprice,_id}=product;
 
   const isProductAvailableinCart=(id)=>{
-      return getToken()?user.cart.find((e=>e.productDetails._id===id)):false
+    return getToken()?user.cart.find((e=>e.productDetails._id===id)):false
 
   }
-  
+
   const isProductAvailableInWishList=(id)=>{
     return getToken()?user.wishlist.find((e)=>e._id===id):false
   }

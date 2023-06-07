@@ -22,6 +22,13 @@ const UserProvider = ({ children }) => {
     showAlert('success','Success','Address added successfully')
   };
 
+  const handleDeleteAddress=(id)=>{
+
+    const newAddress=user.address.filter(eachAddress=>eachAddress._id!==id)
+    setUser({...user,address:newAddress})
+    showAlert('success','Success','Address deleted successfully')
+  }
+
 
   const setUserInLocalStorage = (user) => {
     localStorage.setItem("user", JSON.stringify({ ...user}));  
@@ -129,7 +136,8 @@ const UserProvider = ({ children }) => {
         user,
         setUser,
         addUserAddress,
-        selectedAddress
+        selectedAddress,
+        handleDeleteAddress
       }}
     >
       {children}

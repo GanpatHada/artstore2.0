@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import "./UserDetails.css";
 import { useState } from "react";
-import { AiOutlinePlus, AiOutlineUser } from "react-icons/ai";
-import { UserContext } from "../../context/UserContext";
+import { AiOutlineDelete, AiOutlineEdit, AiOutlinePlus, AiOutlineUser } from "react-icons/ai";
+import { UserContext} from "../../context/UserContext";
 import AddressDialog from "../../components/dialog/Addressdialog";
 
 const UserDetails = () => {
-  const { user } = useContext(UserContext);
+  const { user,handleDeleteAddress } = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -69,8 +69,12 @@ const UserDetails = () => {
             {user.address.length===0?<h3>No address found</h3>:
             user.address.map((address) => {
               return (
+
                 <div key={address._id} className="all-centered">
                   {`${address.details} , ${address.city} , ${address.state} , ${address.pin}`}
+                  <button  id="edit-address-btn"><AiOutlineEdit/></button>
+                  <button onClick={()=>handleDeleteAddress(address._id)} id="delete-address-btn"><AiOutlineDelete/></button>
+
                 </div>
               );
             })}
