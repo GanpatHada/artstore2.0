@@ -1,0 +1,10 @@
+#cart-box{
+    padding: 10px;
+    padding-bottom: 30px;
+    height: calc(100vh - 60px);
+}
+#cart-checkout-box{
+    display: flex;
+    height: 100%;
+
+}

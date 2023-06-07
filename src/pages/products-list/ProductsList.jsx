@@ -15,7 +15,6 @@ const ProductList = () => {
     sortValue,
     ratingValue,
   } = useContext(ProductContext);
-  const {open}=useContext(LoadingContext)
   useEffect(() => {
     fetchAllProducts();
     
@@ -61,11 +60,11 @@ const ProductList = () => {
     }
     if (sortValue) {
       if (sortValue === "LOW TO HIGH")
-        originalData = originalData.sort(
+        originalData = [...originalData].sort(
           (val1, val2) => val1.price - val2.price
         );
       if (sortValue === "HIGH TO LOW")
-        originalData = originalData.sort(
+        originalData = [...originalData].sort(
           (val1, val2) => val2.price - val1.price
         );
     }
@@ -74,7 +73,7 @@ const ProductList = () => {
   };
   return (
     <>
-    {open?<Loader/>:<div id="productlist">
+    <div id="productlist">
       <Filter />
       <main id="products-box">
         <h2>
@@ -87,7 +86,7 @@ const ProductList = () => {
           </div>:<div className="all-centered"  style={{height:'calc(100vh - 120px)',width:'100%'}}>No Products found</div>}
          
       </main>
-    </div>}
+    </div>
     </>
   );
 };

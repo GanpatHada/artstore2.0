@@ -7,19 +7,19 @@ export const LoadingContext = createContext();
 export const LoadingProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
+  const startLoading = () => {
     setOpen(true);
+  };
+  const stopLoading = () => {
+    setOpen(false);
   };
 
   return (
     <LoadingContext.Provider
       value={{
         open,
-        handleClose,
-        handleOpen,
+        startLoading,
+        stopLoading,
       }}
     >
       {children}

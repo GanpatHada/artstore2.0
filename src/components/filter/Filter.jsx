@@ -26,7 +26,7 @@ const Filter = () => {
           <button onClick={handleClearFilter}>clear</button>
         </div>
         <div className="sub-headings">
-          <h4>Rating {`>= ${ratingValue}`}</h4>
+          <h4>Rating {ratingValue>0&&`above ${ratingValue}`}</h4>
           <div id="range-box">
             <Slider
               onChange={(e) => handleRatingChange(e.target.value)}

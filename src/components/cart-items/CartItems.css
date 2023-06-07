@@ -1,0 +1,101 @@
+#cart-items-box{
+    flex: 3;
+    border: 2px solid rgb(228, 228, 228);
+    height: 100%;
+    margin: 10px;
+    padding: 10px;
+    
+}
+#cart-items-box h1{
+    height: 10%;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    
+}
+.each-cart-item{
+    display: flex;
+    width: 100%;
+    height: 220px;
+    border: 1px solid grey;
+    margin: 10px 0px;
+    padding: 10px;
+    position: relative;
+}
+#cart-items-wrapper{
+    width: 100%;
+    height: 90%;
+    overflow-y: auto;
+
+}
+#cart-items-wrapper::-webkit-scrollbar{
+    display: none;
+}
+#cart-items-box .image-section{
+    width: 100%;
+    flex: 2;
+    
+}
+#cart-items-box .image-section img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+#cart-items-box .data-section{
+    width: 100%;
+    flex: 4;
+    
+}
+#cart-items-box .data-section > div{
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    height: 100%;
+    width: calc(100% - 20px);
+    
+}
+#counter{
+    height: 36px;
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px;
+}
+#counter button{
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+}
+#count{
+    height: 36px ;
+    width: 36px;
+    border: 1px solid rgb(134, 134, 134);
+}
+.cart-data-wrapper > *{
+    margin: 5px;
+}
+.remove-cart-item-btn{
+    position: absolute;
+    right: 10px ;
+    bottom: 10px;
+    height: 36px;
+    width: 76px;
+    border: 1px solid red;
+    color: red;
+    background-color: white;
+    border-radius: 5px;
+}
+.move-to-wishlist-btn{
+    padding: 10px;
+    color: white;
+    background-color: orangered;
+    border-radius: 5px;
+}
+#empty-cart-box{
+    width: 100%;
+    height: 90%;
+    font-size: 30px;
+    color: red;
+    
+}

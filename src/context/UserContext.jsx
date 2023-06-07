@@ -1,36 +1,36 @@
 import { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { NotificationContext } from "./NotificationContext";
 import { LoadingContext } from "./LoadingContext";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const location=useLocation()
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
   const { showAlert } = useContext(NotificationContext);
-  const{handleOpen,handleClose}=useContext(LoadingContext)
+  const{startLoading,stopLoading}=useContext(LoadingContext)
   const navigate = useNavigate();
 
   const setToken = (token) => localStorage.setItem("token", token);
 
   
-  const updateUserAddress = (newAddress) => {
-    const previousUser = JSON.parse(localStorage.getItem("user"));
-    const updatedUser = {
-      ...previousUser,
-      address: [...previousUser.address, newAddress],
-    };
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-    setUser(JSON.parse(localStorage.getItem('user')))
-  };
+  // const updateUserAddress = (newAddress) => {
+  //   const previousUser = JSON.parse(localStorage.getItem("user"));
+  //   const updatedUser = {
+  //     ...previousUser,
+  //     address: [...previousUser.address, newAddress],
+  //   };
+  //   localStorage.setItem("user", JSON.stringify(updatedUser));
+    
+  // };
 
 
   const setUserInLocalStorage = (user) => {
-    localStorage.setItem("user", JSON.stringify({ ...user, address: [] }));
-    setUser(JSON.parse(localStorage.getItem('user')));
-    
+    localStorage.setItem("user", JSON.stringify({ ...user, address: [] }));  
   };
 
   const handleAuthErros = (errorCode) => {
+    stopLoading()
     if (errorCode === 422)
       return showAlert(
         "error",
@@ -51,6 +51,7 @@ const UserProvider = ({ children }) => {
       );
   };
   const handleSignup = async ({ name, password, email }) => {
+    startLoading()
     try {
       let response = await fetch("/api/auth/signup", {
         method: "POST",
@@ -69,11 +70,14 @@ const UserProvider = ({ children }) => {
         const { createdUser, encodedToken } = await response.json();
         setToken(encodedToken);
         setUserInLocalStorage(createdUser);
+        setUser(createdUser)
         showAlert("success", `Success`, "Account created successfully");
-        return navigate("/landing");
+        stopLoading()
+        return navigate(location?.state?.from?.pathname ?? "/");
       }
       return handleAuthErros(response.status);
     } catch (error) {
+      stopLoading()
       console.log(error);
     }
   };
@@ -82,6 +86,7 @@ const UserProvider = ({ children }) => {
     email = "guest@gmail.com",
     password = "guest123",
   }) => {
+    startLoading();
     try {
       let response = await fetch("/api/auth/login", {
         method: "POST",
@@ -97,11 +102,14 @@ const UserProvider = ({ children }) => {
         const { foundUser, encodedToken } = await response.json();
         setToken(encodedToken);
         setUserInLocalStorage(foundUser);
+        setUser(foundUser)
         showAlert("success", `Success`, "Login successfully");
-        return navigate("/landing");
+        stopLoading();
+        return navigate(location?.state?.from?.pathname ?? "/");
       }
       return handleAuthErros(response.status);
     } catch (e) {
+      stopLoading()
       console.log(e);
     }
   };
@@ -109,7 +117,10 @@ const UserProvider = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    setUser({});
+    navigate('/')
     return showAlert("success", "Success", "Logout successfully");
+
   };
   return (
     <UserContext.Provider
@@ -119,7 +130,7 @@ const UserProvider = ({ children }) => {
         handleLogout,
         user,
         setUser,
-        updateUserAddress
+        // updateUserAddress
       }}
     >
       {children}

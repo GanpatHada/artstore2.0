@@ -1,24 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ProductDetails.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import { ProductContext } from "../../context/ProductContext";
 const ProductDetails = () => {
   const [particularProduct, setParticularProduct] = useState(false);
+  const navigate=useNavigate();
+  const{user}=useContext(UserContext)
+  const{getToken,handleAddtoCartProduct,handleAddToWishlist}=useContext(ProductContext)
   const { id } = useParams();
   const fetchCurrentProduct = async () => {
     try {
       let response = await fetch(`/api/products/${id}`, {
         method: "GET",
       });
-      console.log(response);
       if (response.status === 200) {
         response = await response.json();
-        console.log(response);
         setParticularProduct(await response.product);
       }
     } catch (error) {
       console.log(error);
     }
   };
+  
+  const isProductAvailableinCart=(id)=>{
+    return getToken()?user.cart.find((e=>e.productDetails._id===id)):false
+
+}
+  const isProductAvailableInWishList=(id)=>{
+    return getToken()?user.wishlist.find((e=>e._id===id)):false
+
+}
 
   useEffect(() => {
     fetchCurrentProduct();
@@ -46,8 +58,13 @@ const ProductDetails = () => {
             <p id="special-price">{particularProduct.price}</p>
             <p>{particularProduct.rating}&nbsp;⭐</p>
             <div>
-              <button>Add to cart</button>&nbsp;
-              <button>Add to WishList</button>
+            {isProductAvailableinCart(particularProduct._id)?<button style={{backgroundColor:'#292929'}} onClick={()=>{navigate('/cart')}}>Go to cart</button>:
+         <button  onClick={()=>getToken()?handleAddtoCartProduct(particularProduct):navigate('/login')}>Add to cart</button>}&nbsp;
+         
+         
+         {isProductAvailableInWishList(particularProduct._id)?<button style={{backgroundColor:'#292929'}} onClick={()=>navigate('/wishlist')}>Go to WishList</button>:
+          <button onClick={()=>getToken()?handleAddToWishlist(particularProduct):navigate('/wishlist')}>Add to WishList</button>
+         }
             </div>
           </section>
         </div>

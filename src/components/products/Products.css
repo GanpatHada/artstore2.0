@@ -5,29 +5,37 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+    padding: 10px;
+   
 }
+
 
 .wishlist-box{
     height: 40px;
     width: 40px;
     border-radius: 50%;
     position: absolute;
-    top: 10px;
-    right:10px;
+    top: 5px;
+    right:5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(223, 223, 223);
     
+   
+    
+}
+.wishlist-box:hover{
+    background-color: rgb(240, 240, 240);
 }
 .wishlist-box *{
     font-size: 30px;
 }
 .image-box{
-    height: 23vw;
-    padding: 10px;
-   
-    
+    height: 18vw;
+    padding: 10px;   
 }
 
 .cart-buttons-box,.price-box,.product-title-box{
@@ -46,7 +54,7 @@
 }
 .product-title-box {
     
-    padding: 0px 10px;
+    padding:10px;
     
 }
 .price-box{
@@ -75,11 +83,12 @@
 
 .cart-buttons-box button{
     height: 36px;
-    width: 100%;
     border:none;
     color: white;
     background-color: orangered;
     position: absolute;
-    bottom: 0px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
     
 }

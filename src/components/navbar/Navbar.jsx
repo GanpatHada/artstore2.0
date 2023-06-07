@@ -6,8 +6,10 @@ import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext} from "../../context/ProductContext";
+import { UserContext } from "../../context/UserContext";
 const Navbar = () => {
-  const { handleSearchChange, searchValue } = useContext(ProductContext);
+  const { handleSearchChange, searchValue ,getToken} = useContext(ProductContext);
+  const{user}=useContext(UserContext);
   const navigate = useNavigate();
   return (
     <div id="navbar">
@@ -26,16 +28,16 @@ const Navbar = () => {
           <NavLink to="/cart">
             <div className="cart-box">
               <BsCart3 className="cart-icon" />
-              <div className="cart-badge">1</div>
+              {getToken()&&<div className="cart-badge">{user.cart.length}</div>}
             </div>
           </NavLink>
           <NavLink to="/wishlist">
             <div className="cart-box">
               <AiOutlineHeart className="cart-icon" />
-              <div className="cart-badge">8</div>
+              {getToken()&&<div className="cart-badge">{user.wishlist.length}</div>}
             </div>
           </NavLink>
-          <NavLink to={"/login"}>
+          <NavLink to={"/userdetails"}>
             <div className="cart-box">
               <AiOutlineUser id="profile-icon" className="cart-icon" />
             </div>

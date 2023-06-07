@@ -14,14 +14,14 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <LoadingProvider>
-      <ProductProvider>
+      <LoadingProvider>
         <NotificationProvider>
           <UserProvider>
-            <App />
+            <ProductProvider>
+              <App />
+            </ProductProvider>
           </UserProvider>
         </NotificationProvider>
-      </ProductProvider>
       </LoadingProvider>
     </BrowserRouter>
   </React.StrictMode>,
