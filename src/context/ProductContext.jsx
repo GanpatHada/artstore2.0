@@ -4,10 +4,12 @@ import { createContext } from "react";
 import { LoadingContext } from "./LoadingContext";
 import { NotificationContext } from "./NotificationContext";
 import { UserContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 export const ProductContext = createContext();
 
 export default function ProductProvider({ children }) {
+  const navigate=useNavigate();
   const { showAlert } = useContext(NotificationContext);
   const { startLoading, stopLoading } = useContext(LoadingContext);
   const { setUser, user } = useContext(UserContext);
@@ -18,7 +20,7 @@ export default function ProductProvider({ children }) {
   const [priceValue, setPriceValue] = useState(false);
   const [sortValue, setSortValue] = useState(false);
   const [categoriesArray, setCategoriesArray] = useState([]);
-
+  
   const [cartProducts, setCartProducts] = useState([]);
 
   const getToken = () => localStorage.getItem("token");
@@ -77,6 +79,13 @@ export default function ProductProvider({ children }) {
   const handlePriceChange = (value) => {
     setPriceValue(value);
   };
+
+
+
+  const handleCategoryClicked=(category)=>{
+       setCategoriesArray([...categoriesArray,category]);
+       navigate('/products')
+  }
 
   const handleSortChange = (type) => {
     setSortValue(type);
@@ -208,6 +217,7 @@ export default function ProductProvider({ children }) {
         fetchAllProducts,
         searchValue,
         ratingValue,
+        handleCategoryClicked,
         categoriesArray,
         priceValue,
         sortValue,

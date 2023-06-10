@@ -15,7 +15,7 @@ const Categories = () => {
         {topCategories.map(({ _id, categoryName,image }) => {
           return (
             <div key={_id} className="each-category-box">
-              <div className="category-image-box" onClick={()=>handleCategoryClicked(_id)}>
+              <div className="category-image-box" onClick={()=>handleCategoryClicked(categoryName)}>
                  <img src={image} alt="Not found" />
               </div>
               <p className="text-centered">{categoryName}</p>
