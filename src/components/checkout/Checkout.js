@@ -2,12 +2,14 @@ import React, { useContext } from "react";
 import "./Checkout.css";
 import { UserContext } from "../../context/UserContext";
 import { NotificationContext } from "../../context/NotificationContext";
+import { useState } from "react";
 const Checkout = () => {
-  const { user,selectedAddress } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const {showAlert}=useContext(NotificationContext)
+  const [selectedAddress,setSelctedAddress]=useState(false);
+  const[selectChecked,setSelectedChecked]=useState(false);
   const handlePlaceOrder=()=>{
-    if(!selectedAddress)
-      return showAlert('error','Error','Please select address checkbox')
+      return showAlert('success','Congratulations','Your order has been placed')  
   }
 
   const { totalPrice, totalItems, oldprice } = user.cart.reduce(
@@ -39,10 +41,20 @@ const Checkout = () => {
           <hr />
           <p>You have saved {oldprice-(totalPrice+50)} on this order</p>
           <div className="all-centered" style={{justifyContent:'flex-start'}}>
-          <input type="checkbox" id='select-address' />
-          <label htmlFor="select-address">select Address</label>
+          <input checked={selectChecked} onChange={()=>setSelectedChecked(!selectChecked)} type="checkbox" id='select-address' />
+          <label htmlFor="select-address" >select Address</label>
           </div>
-          <button onClick={handlePlaceOrder}>Place your order</button>
+          <div id="addressbox" style={{display:selectChecked?'block':'none'}}>
+            {
+              user.address.map(({details,city,state,pin,_id})=>{
+                 return <div>
+                   <input onChange={()=>setSelctedAddress(_id)} type="radio" checked={selectedAddress===_id} name="address-selector" id={_id} />
+                   <label htmlFor={_id}>{details},{state},{city},{pin}</label> 
+                 </div>
+              })
+            }
+          </div>
+          <button disabled={!(selectedAddress&&selectChecked)} onClick={handlePlaceOrder}>Place your order</button>
         </div>}
       </div>
       

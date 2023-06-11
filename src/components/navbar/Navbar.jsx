@@ -41,7 +41,7 @@ const Navbar = () => {
             </div>
           </NavLink>
           <NavLink to={"/userdetails"}>
-            <div className="cart-box">
+            <div className="cart-box" title={user?.name}>
               <AiOutlineUser style={{color:isUserLoggedIn()?'lightgreen':'red'}} className="cart-icon" />
             </div>
           </NavLink>

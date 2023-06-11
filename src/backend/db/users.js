@@ -20,6 +20,8 @@ export const users = [
       city:'Gwalior',
       state:'Madhya Pradesh',
       pin:'474003'
-    }]
+    }],
+    cart:[],
+    wishlist:[]
   },
 ];

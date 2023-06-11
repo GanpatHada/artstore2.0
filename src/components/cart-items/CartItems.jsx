@@ -6,18 +6,13 @@ import { UserContext } from "../../context/UserContext";
 
 const CartItems = () => {
 
-  const{fetchCartItems,handleDecreaseQuantity,handleIncreaseQuantity,removeCartItem,handleAddToWishlist}=useContext(ProductContext)
+  const{handleDecreaseQuantity,handleIncreaseQuantity,removeCartItem,handleAddToWishlist}=useContext(ProductContext)
   const{user}=useContext(UserContext)
 
   const isProductAvailableInWishList=(id)=>{
      return  user.wishlist.find((e)=>e._id===id)
   }
-  
    const {cart}=user;
-  useEffect(() => {
-    fetchCartItems();
-  }, [])
-  
   return (
     <div id="cart-items-box">
       <h1>Cart</h1>

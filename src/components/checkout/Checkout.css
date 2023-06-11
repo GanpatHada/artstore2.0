@@ -21,6 +21,34 @@
     margin-top: 10px;
 
 }
+#check-out-box button:disabled{
+    background-color: lightgray;
+    cursor: not-allowed;
+}
 #check-out-fields *{
     margin: 8px 0px;
+}
+
+#addressbox{
+    height: 30%;
+    background-color: rgb(235, 235, 235);
+    padding: 10px;
+    overflow: auto;
+    padding-bottom: 0px;
+    
+}
+#addressbox div{
+    margin-top: 0px;
+    margin-bottom: 10px;
+    background-color: white;
+    border: 1px solid rgb(197, 197, 197);
+    height: 60px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+}
+#addressbox div input[type='radio']{
+    margin-right: 10px;
 }

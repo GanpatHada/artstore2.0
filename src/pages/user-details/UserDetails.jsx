@@ -15,7 +15,7 @@ const UserDetails = () => {
   const [openAddressDialog, setOpenAddressDialog] = useState(false);
   const { handleLogout } = useContext(UserContext);
   const [currentUserDetails, setCurrentUserDetails] = useState("Profile");
-  const[dialogFor,setDialogFor]=useState('add');
+  const[dialogFor,setDialogFor]=useState(null);
 
   const handleAddAddress=()=>{
     setOpenAddressDialog(true);
@@ -27,7 +27,10 @@ const UserDetails = () => {
     setDialogFor(id)
   }
 
-  const handleClose=()=>setOpenAddressDialog(false);
+  const handleClose=()=>{
+    setOpenAddressDialog(false);
+    setDialogFor(null);
+  }
 
   return (
     <>

@@ -26,7 +26,7 @@ const Filter = () => {
           <button onClick={handleClearFilter}>clear</button>
         </div>
         <div className="sub-headings">
-          <h4>Rating {ratingValue>0&&`above ${ratingValue}`}</h4>
+          <h4>Rating {ratingValue > 0 && `above ${ratingValue}`}</h4>
           <div id="range-box">
             <Slider
               onChange={(e) => handleRatingChange(e.target.value)}
@@ -45,20 +45,47 @@ const Filter = () => {
         <div className="sub-headings">
           <h4>Category</h4>
           <ul>
-            {topCategories.map(({ categoryName, _id }) => {
-              return (
-                <li key={_id}>
-                  <input
-                    type="checkbox"
-                    checked={categoriesArray.includes(categoryName)}
-                    id={_id}
-                    value={categoryName}
-                    onChange={(e) => handleCategoryChange(e.target.value)}
-                  />
-                  <label htmlFor={_id}>{categoryName}</label>
-                </li>
-              );
-            })}
+            
+            <li>
+              <input
+                type="checkbox"
+                checked={categoriesArray.includes('Madhubani')}
+                id='mb'
+                value='Madhubani'
+                onChange={(e) => handleCategoryChange(e.target.value)}
+              />
+              <label htmlFor='mb'>Madhubani</label>
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                checked={categoriesArray.includes('Warli')}
+                id='wl'
+                value='Warli'
+                onChange={(e) => handleCategoryChange(e.target.value)}
+              />
+              <label htmlFor='wl'>Warli</label>
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                checked={categoriesArray.includes('Miniature')}
+                id='mt'
+                value='Miniature'
+                onChange={(e) => handleCategoryChange(e.target.value)}
+              />
+              <label htmlFor='mt'>Miniature</label>
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                checked={categoriesArray.includes('Phad')}
+                id='pd'
+                value='Phad'
+                onChange={(e) => handleCategoryChange(e.target.value)}
+              />
+              <label htmlFor='pd'>Phad</label>
+            </li>
           </ul>
         </div>
         <div className="sub-headings">
@@ -70,7 +97,7 @@ const Filter = () => {
                 id="radio-1"
                 name="common"
                 value={"7000 TO INFINITY"}
-                checked={priceValue==="7000 TO INFINITY"}
+                checked={priceValue === "7000 TO INFINITY"}
                 onChange={(e) => handlePriceChange(e.target.value)}
               />
               <label htmlFor="radio-1">above INR 7000</label>
@@ -81,7 +108,7 @@ const Filter = () => {
                 id="radio-2"
                 name="common"
                 value={"5000 TO 7000"}
-                checked={priceValue==="5000 TO 7000"}
+                checked={priceValue === "5000 TO 7000"}
                 onChange={(e) => handlePriceChange(e.target.value)}
               />
               <label htmlFor="radio-2">INR 5000-7000</label>
@@ -92,7 +119,7 @@ const Filter = () => {
                 id="radio-3"
                 name="common"
                 // checked={}
-                checked={priceValue==="3000 TO 5000"}
+                checked={priceValue === "3000 TO 5000"}
                 value={"3000 TO 5000"}
                 onChange={(e) => handlePriceChange(e.target.value)}
               />
@@ -105,7 +132,7 @@ const Filter = () => {
                 name="common"
                 // checked={}
                 value={"1000 TO 3000"}
-                checked={priceValue==="1000 TO 3000"}
+                checked={priceValue === "1000 TO 3000"}
                 onChange={(e) => handlePriceChange(e.target.value)}
               />
               <label htmlFor="radio-4">INR 1000-3000</label>
@@ -116,7 +143,7 @@ const Filter = () => {
                 id="radio-5"
                 name="common"
                 value={"0 TO 1000"}
-                checked={priceValue==="0 TO 1000"}
+                checked={priceValue === "0 TO 1000"}
                 onChange={(e) => handlePriceChange(e.target.value)}
               />
               <label htmlFor="radio-5">below INR 1000</label>

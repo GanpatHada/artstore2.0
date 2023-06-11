@@ -22,6 +22,13 @@ const UserProvider = ({ children }) => {
     showAlert('success','Success','Address added successfully')
   };
 
+  const editUserAddress=(id,address)=>{
+
+    let addressList=user.address.map((prevAdd)=>prevAdd._id===id?{...address}:{...prevAdd});
+    setUser({...user,address:addressList});
+
+  }
+
   const handleDeleteAddress=(id)=>{
 
     const newAddress=user.address.filter(eachAddress=>eachAddress._id!==id)
@@ -75,7 +82,7 @@ const UserProvider = ({ children }) => {
         const { createdUser, encodedToken } = await response.json();
         setToken(encodedToken);
         setUserInLocalStorage(createdUser);
-        setUser(createdUser)
+        setUser({...createdUser,cart:[],wishlist:[]})
         showAlert("success", `Success`, "Account created successfully");
         stopLoading()
         return navigate(location?.state?.from?.pathname ?? "/");
@@ -107,7 +114,7 @@ const UserProvider = ({ children }) => {
         const { foundUser, encodedToken } = await response.json();
         setToken(encodedToken);
         setUserInLocalStorage(foundUser);
-        setUser(foundUser)
+        setUser({...foundUser,cart:[],wishlist:[]})
         showAlert("success", `Success`, "Login successfully");
         stopLoading();
         return navigate(location?.state?.from?.pathname ?? "/");
@@ -136,6 +143,7 @@ const UserProvider = ({ children }) => {
         user,
         setUser,
         addUserAddress,
+        editUserAddress,
         selectedAddress,
         handleDeleteAddress
       }}

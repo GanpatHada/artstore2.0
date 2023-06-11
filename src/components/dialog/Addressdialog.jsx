@@ -7,48 +7,58 @@ import { NotificationContext } from "../../context/NotificationContext";
 import { UserContext } from "../../context/UserContext";
 
 export default function AddressDialog(props) {
-  const {user}=useContext(UserContext);
-  const { onClose, open ,dialogFor} = props;
-  const getAddressDetails=(id)=>{
-      console.log(user.address.find(({_id})=>id===_id));
-  }
+  const { user } = useContext(UserContext);
+  const { onClose, open, dialogFor } = props;
+  const getAddressDetails = (id) => {
+    const { details, city, state, pin } = user.address.find(
+      ({ _id }) => id === _id
+    );
+    setAddress({ ...address, details, city, state, pin });
+  };
 
-  const { addUserAddress } = useContext(UserContext);
+  const { addUserAddress, editUserAddress } = useContext(UserContext);
   const { showAlert } = useContext(NotificationContext);
-  const [address, setAddress] = useState(dialogFor==='add'?{
-    details: "",
-    city: "",
-    state: "",
-    pin: "",
-  }:getAddressDetails(dialogFor));
-  
-  
+  const [address, setAddress] = useState({details:'',city:'',pin:'',state:''});
+
+  useEffect(() => {
+    if (dialogFor) {
+      if (dialogFor !== "add") return getAddressDetails(dialogFor);
+    return setAddress({...address})  
+    }
+  }, [dialogFor]);
+
   const checkErrors = () => {
-    if (Object.values(address).filter((e) => e.length === 0).length !== 0)
-      return showAlert("error", "Error", "Fields are empty");
-    if (address.pin.length !== 6)
-      return showAlert("error", "Error", "Incorrect pin code");
+    if (Object.values(address).filter((e) => e.length === 0).length !== 0) {
+      showAlert("error", "Error", "Fields are empty");
+      return true;
+    }
+
+    if (address.pin.length !== 6) {
+      showAlert("error", "Error", "Incorrect pin code");
+      return true;
+    }
     return false;
   };
 
   const addAddress = () => {
     if (!checkErrors()) {
+      addUserAddress({...address,_id: uuid(),});
       handleClose();
-      addUserAddress(address);
-      setAddress({
-        details: "",
-        city: "",
-        state: "",
-        pin: "",
-      });
       showAlert("success", "Success", "Address added successfully");
+    }
+  };
+
+  const editAddress = (id) => {
+    if (!checkErrors()) {
+      editUserAddress(id, address);
+      handleClose();
+      showAlert("success", "Success", "Address changed successfully");
     }
   };
 
   const fillDummyValues = () =>
     setAddress({
       ...address,
-      _id: uuid(),
       details: "RNTH hostel near It park",
       city: "Indore",
       state: "M.P.",
@@ -62,7 +72,7 @@ export default function AddressDialog(props) {
   return (
     <Dialog id="address-dialog-box" onClose={handleClose} open={open}>
       <DialogTitle>
-        <strong>Add address</strong>
+        <strong>{dialogFor !== "add" ? "Edit" : "Add"} address</strong>
       </DialogTitle>
       <div id="address-form">
         <label htmlFor="pin">Enter Pin code</label>
@@ -106,23 +116,27 @@ export default function AddressDialog(props) {
         />
         <div id="preview">
           <strong>
-            <span>{`${address.details}  ${address.city}  ${address.state}  ${address.pin} `}</span>
+            <span>{`${address?.details}  ${address?.city}  ${address?.state}  ${address?.pin} `}</span>
           </strong>
         </div>
         <div id="address-buttons">
-          {
-            dialogFor==='add'?<>
-            <button id="add-address-btn" onClick={addAddress}>
-              Add address
-            </button>
-            <button id="fill-address-btn" onClick={fillDummyValues}>
-              Fill dummy address
-            </button>
-            </>:<button id="edit-address-mainbtn" onClick={addAddress}>
+          {dialogFor === "add" ? (
+            <>
+              <button id="add-address-btn" onClick={addAddress}>
+                Add address
+              </button>
+              <button id="fill-address-btn" onClick={fillDummyValues}>
+                Fill dummy address
+              </button>
+            </>
+          ) : (
+            <button
+              id="edit-address-mainbtn"
+              onClick={() => editAddress(dialogFor)}
+            >
               Edit address
             </button>
-          }
-          
+          )}
         </div>
       </div>
     </Dialog>
