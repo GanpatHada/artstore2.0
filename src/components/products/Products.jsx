@@ -5,11 +5,20 @@ import { AiFillHeart } from "react-icons/ai";
 import { useContext } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import { UserContext } from "../../context/UserContext";
+import star from '../../images/star.png'
 const Products = ({product}) => {
   const navigate=useNavigate()
   const{user}=useContext(UserContext)
   const{handleAddtoCartProduct,handleAddToWishlist,getToken}=useContext(ProductContext)
-  const{image,title,categoryName,price,oldprice,_id}=product;
+  const{image,title,categoryName,price,oldprice,_id,rating}=product;
+
+  const getStarRating=()=>{
+    let rate=[];
+    for(let i=0;i<Number(rating);i++)
+       rate.push(<img src={star} alt="..." />)
+    return rate  
+  }
+
 
   const isProductAvailableinCart=(id)=>{
     return getToken()?user.cart.find((e=>e.productDetails._id===id)):false
@@ -35,6 +44,9 @@ const Products = ({product}) => {
       <div className="product-title-box">
         <strong>{title.length>20?title.slice(0,20)+'...':title}</strong>
         <p>{categoryName}</p>
+      </div>
+      <div className="star-box">
+        {getStarRating()}
       </div>
       <div className="price-box">
         <span id="oldprice">INR : {oldprice}</span>

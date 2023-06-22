@@ -34,6 +34,7 @@
     margin: 10px;
 }
 #product-details-box button{
+    background-color: #6fb500;
     padding: 10px;
     border-radius: 3px;
     color: white;
@@ -47,5 +48,13 @@
 #special-price{
     font-weight: bold;
     color: green;
+}
+#product-details-box .star-box img{
+    height: 24px;
+}
+#product-details-box .star-box{
+    
+    
+    padding-left: 0px;
 }
 

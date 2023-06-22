@@ -3,6 +3,7 @@ import "./ProductDetails.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { ProductContext } from "../../context/ProductContext";
+import star from '../../images/star.png'
 const ProductDetails = () => {
   const [particularProduct, setParticularProduct] = useState(false);
   const navigate=useNavigate();
@@ -22,6 +23,15 @@ const ProductDetails = () => {
       console.log(error);
     }
   };
+
+  const getRating=(rate)=>{
+    let rating=[];
+    for(let i=0;i<rate;i++)
+    {
+      rating.push(<img src={star} alt="..."/>)
+    }
+    return rating
+  }
   
   const isProductAvailableinCart=(id)=>{
     return getToken()?user.cart.find((e=>e.productDetails._id===id)):false
@@ -56,7 +66,7 @@ const ProductDetails = () => {
             </p>
             <p id="old-price">{particularProduct.oldprice}</p>
             <p id="special-price">{particularProduct.price}</p>
-            <p>{particularProduct.rating}&nbsp;⭐</p>
+            <p className="star-box" >{getRating(particularProduct.rating)}</p>
             <div>
             {isProductAvailableinCart(particularProduct._id)?<button style={{backgroundColor:'#292929'}} onClick={()=>{navigate('/cart')}}>Go to cart</button>:
          <button  onClick={()=>getToken()?handleAddtoCartProduct(particularProduct):navigate('/login')}>Add to cart</button>}&nbsp;
